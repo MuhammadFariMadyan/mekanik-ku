@@ -1,0 +1,55 @@
+<%- include ../templates/header.ejs %>
+<%- include ../templates/navbar_auth.ejs %>
+    <div class="container" style="text-align: center;">
+      <div id="container" ng-app='mekanikku' ng-controller='main_control' style="text-align: center;">
+          <span id="head" style="font-size:60px;font-family: 'Nunito', sans-serif;">
+            Cari
+          </span><span id="demo" style="font-size:60px;font-family: 'Shadows Into Light', cursive;color: #3b8dbd;">
+            Mekanik Bengkel</span><br />
+          <input type="search" size="40" placeholder="nama, lokasi" ng-model="search" id="search" style="font-size:16px;">
+          <br>
+          <br>
+          <table class="table">
+              <thead>
+                <th>Id</th>
+                <th>Id Bengkel</th>
+                <th>Nama</th>
+                <th>No. HP</th>
+                <th>Keterangan</th>
+                <th colspan="2">Aksi</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="data in loaded_mekaniks | filter:search">
+                  <td>{{data.id}}</td>
+                  <td>{{data.BengkelId}}</td>
+                  <td>{{data.fullName}}</td>
+                  <td>{{data.numberPhone}}</td>
+                  <td>{{data.keterangan}}</td>
+                  <td>
+                    <a href="/mekanik/{{data.id}}/edit" class="btn btn-primary">Edit</a>
+                    <button class="btn btn-sm btn-danger btn-delete" data-id="{{data.id}}"> Delete </button>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $('.btn-delete').click(function(){
+      let id = $(this).attr('data-id');
+      swal({
+        title: "Yakin Ingin Menghapus Data Mekanik ini?",
+        text: "Data yang dihapus, tidak bisa kembali lagi.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location.assign(`/mekanik/delete/${id}`);
+        }
+      });
+    });
+    </script>
+  <%- include ../templates/footer.ejs %>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mekanik-Ku</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.minj.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-light">
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/bengkel">Bengkel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <br>
+    <ol class="breadcrumb" style="text-align:center;">
+      <h3>Data Mekanik Bengkel</h3>
+    </ol>
+    <div class="container">
+       if({{alert.message}} != '') {
+      <div class="alert alert-<%= alert.status %>">
+        {{alert.message}}
+      </div>
+       }
+      <table class="table">
+        <thead>
+          <th>Id</th>
+          <th>Id Bengkel</th>
+          <th>Nama</th>
+          <th>No. HP</th>
+          <th>Keterangan</th>
+        </thead>
+        <tbody>
+           for (var i = 0; i < {{ mekanik.length }}; i++) {
+            <tr>
+              <td>
+                {{mekanik[i].id}}
+              </td>
+              <td>
+                {{mekanik[i].BengkelId}}
+              </td>
+              <td>
+                {{mekanik[i].fullName}}
+              </td>
+              <td>
+                {{mekanik[i].numberPhone}}
+              </td>
+              <td>
+                  {{mekanik[i].keterangan}}
+                </td>
+            </tr>
+           }
+        </tbody>
+      </table>
+  </div>
+  </body>
+</html>

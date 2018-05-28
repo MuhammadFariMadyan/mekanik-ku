@@ -1,0 +1,40 @@
+<%- include ../templates/header.ejs %>
+<%- include ../templates/navbar.ejs %>
+    <div class="container" style="text-align: center;">
+      <div id="container" ng-app='mekanikku' ng-controller='main_control' style="text-align: center;">
+          <span id="head" style="font-size:60px;font-family: 'Nunito', sans-serif;">
+            Cari
+          </span><span id="demo" style="font-size:60px;font-family: 'Shadows Into Light', cursive;color: #3b8dbd;">
+            Mekanik Bengkel</span><br />
+          <input type="search" size="40" placeholder="nama, lokasi" ng-model="search" id="search" style="font-size:16px;">
+          <br>
+          <br>
+          <table class="table">
+              <thead>
+                <th>Id</th>
+                <th>Id Bengkel</th>
+                <th>Nama</th>
+                <th>No. HP</th>
+                <th>Keterangan</th>
+                <th colspan="2">Aksi</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="data in loaded_mekaniks | filter:search">
+                  <td>{{data.id}}</td>
+                  <td>{{data.BengkelId}}</td>
+                  <td>{{data.fullName}}</td>
+                  <td>{{data.numberPhone}}</td>
+                  <td>{{data.keterangan}}</td>
+                  <td><button id="article" style="background-color: brown;border:none;height:30px;
+                    border-radius: 5px;"><a href="#" style="color:white;
+                    padding-left:20px;padding-right:20px;">Detail</a></button></td>
+                  <td><button id="downloadbutton" style="background-color:#33363b;border:none;
+                    height:30px;border-radius: 5px;"><a href="#" style="
+                    color:white;padding-left:20px;padding-right:20px;">Hubungi</a></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+  <%- include ../templates/footer.ejs %>

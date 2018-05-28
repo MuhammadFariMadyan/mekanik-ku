@@ -1,0 +1,19 @@
+<%- include ../templates/header.ejs %>
+<%- include ../templates/navbar_auth.ejs %>
+<div class="container" style="text-align: center;">
+    <br>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+    </ol>
+    <% if(alert.message != '') { %>
+    <div class="alert alert-<%= alert.status %>">
+      <%= alert.message %>
+    </div>
+    <% } %>
+    <h3>Data Bengkel</h3>
+
+    <br>
+    <br>
+    </div>
+  </div>
+  <%- include ../templates/footer.ejs %>

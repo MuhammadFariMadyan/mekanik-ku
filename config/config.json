@@ -1,0 +1,23 @@
+{
+    "development": {
+      "username": "root",
+      "password": "",
+      "database": "db_node_mekanikku",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "kubqiszqplckjn",
+      "password": "5fe3dce9a93729149447f641c3a16fb3ec7b060ef938356081417496f0f10725",
+      "database": "dcau8rpic4nvqj",
+      "host": "ec2-54-235-132-202.compute-1.amazonaws.com",
+      "dialect": "postgres"
+    }
+  }
