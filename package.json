@@ -35,19 +35,7 @@
     "bcrypt-nodejs": "0.0.3",
     "express-handlebars": "^3.0.0",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "@angular/animations": "^4.2.4",
-    "@angular/cli": "^1.4.9",
-    "@angular/common": "^4.2.4",
-    "@angular/compiler": "^4.2.4",
-    "@angular/compiler-cli": "^4.4.6",
-    "@angular/core": "^4.2.4",
-    "@angular/forms": "^4.2.4",
-    "@angular/http": "^4.2.4",
-    "@angular/platform-browser": "^4.2.4",
-    "@angular/platform-browser-dynamic": "^4.2.4",
-    "@angular/router": "^4.2.4",
-    "core-js": "^2.4.1" 
+    "passport-local": "^1.0.0" 
   },
   "repository": {
     "type": "git",
