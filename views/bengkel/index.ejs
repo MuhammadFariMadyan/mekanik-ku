@@ -11,7 +11,13 @@
     </div>
     <% } %>
     <h3>Data Bengkel</h3>
-
+      <div style="text-align: left;">
+        <h3>Bengkel milik: <%= bengkelUser.ownerName %></h3>
+        <h3>Nama Bengkel: <%= bengkelUser.bengkelName %></h3>
+        <h3>Alamat: <%= bengkelUser.address %></h3>
+        <h3>Status: <%= bengkelUser.status %></h3>
+        <a href="/bengkel/<%= bengkelUser.id %>/edit" class="btn btn-primary">Edit</a>
+      </div>
     <br>
     <br>
     </div>

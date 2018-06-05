@@ -7,7 +7,7 @@ var mekanikController = require('../controllers/mekanikController.js');
 const Op = require('sequelize').Op;
 var authRoute = require('./auth.js')(router,passport);
 
-router.get('/', mekanikController.index);
+router.get('/', mekanikController.indexWelcome);
 
 router.get('/load',function(req,res){
     console.log("<== load data dari tabel ==>");
@@ -35,11 +35,11 @@ router.get('/bengkel/', bengkelController.index);
 // router.get('/bengkel/delete/:id', bengkelController.hapusBengkel);
 
 router.get('/mekanik/', mekanikController.indexMekanik);
-// router.get('/bengkel/mekanik/create', mekanikController.create);
-// router.post('/bengkel/mekanik/create', mekanikController.createMekanik);
-// router.get('/bengkel/mekanik/:id/edit', mekanikController.edit);
-// router.post('/bengkel/mekanik/:id/edit', mekanikController.editMekanik);
-// router.get('/bengkel/mekanik/delete/:id', mekanikController.hapusMekanik);
+router.get('/mekanik/create', mekanikController.create);
+router.post('/mekanik/create', mekanikController.createMekanik);
+router.get('/mekanik/:id/edit', mekanikController.edit);
+router.post('/mekanik/:id/edit', mekanikController.editMekanik);
+router.get('/mekanik/delete/:id', mekanikController.hapusMekanik);
 router.get('*', bengkelController.notFound);
 
 module.exports = router;

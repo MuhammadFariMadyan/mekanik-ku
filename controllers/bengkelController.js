@@ -3,37 +3,21 @@ const models = require('../models');
 
 exports.index = function(req, res) {
     let page = req.query.page || 1;
-    let offset = 0;
-    if (page > 1) {
-        offset = ((page - 1) * 10)  + 1;
-    }
-    // models.Bengkel.findAndCountAll({
-    //     include: [
-    //         { model: models.Mekanik, required: true}
-    //      ],
-    //     limit : 10,
-    //     offset: offset,
-    //     order : [['id','DESC']]
-    models.Mekanik.findAndCountAll({
-        include: [
-            { model: models.Bengkel, where: { id: 1 }}
-         ],
-        limit : 10,
-        offset: offset,
-        order : [['id','ASC']]
-    }).then((mekanik_bengkel) => {
+    let user = req.user;
+    let userHaveBengkel;
+    models.Bengkel.findOne({ where : { UserId: req.user.id}}).then(function (bengkel) {
         const alertMessage = req.flash('alertMessage');
         const alertStatus = req.flash('alertStatus');
         const alert = { message: alertMessage, status: alertStatus};
-        const totalPage = Math.ceil(mekanik_bengkel.count / 10);
-        const pagination = {totalPage : totalPage, currentPage: page};
-        // console.log(mekanik_bengkel.rows);
+        userHaveBengkel = bengkel.get();
         res.render('bengkel/index',{
-        mekanik_bengkel: mekanik_bengkel.rows,
-        alert: alert,
-        pagination: pagination
+            bengkelUser: userHaveBengkel,
+            user: user,
+            alert: alert
+            });
+        }).catch(function(err){
+        console.log("Error:",err);
         });
-    });
 }
 
 // create bengkel

@@ -49,7 +49,8 @@ models.sequelize.sync().then(function(){
 console.log(err,"Ada masalah dengan database!")
 });
 
-const port = process.env.PORT || 5432;
+// const port = process.env.PORT || 5432;
+const port = process.env.PORT || 3000;
 
 app.listen(port, function(err){
   if(!err)

@@ -5,7 +5,7 @@
           <span id="head" style="font-size:60px;font-family: 'Nunito', sans-serif;">
             Cari
           </span><span id="demo" style="font-size:60px;font-family: 'Shadows Into Light', cursive;color: #3b8dbd;">
-            Mekanik Bengkel</span><br />
+            Mekanik Bengkel <%= bengkelUser.bengkelName %></span> <br />
           <input type="search" size="40" placeholder="nama, lokasi" ng-model="search" id="search" style="font-size:16px;">
           <br>
           <br>
@@ -27,7 +27,7 @@
                   <td>{{data.keterangan}}</td>
                   <td>
                     <a href="/mekanik/{{data.id}}/edit" class="btn btn-primary">Edit</a>
-                    <button class="btn btn-sm btn-danger btn-delete" data-id="{{data.id}}"> Delete </button>
+                    <button class="btn btn-sm btn-danger btn-delete" data-id="{{data.id}}">Delete</button>
                 </td>
                 </tr>
               </tbody>

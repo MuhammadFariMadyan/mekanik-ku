@@ -1,57 +1,78 @@
-var exports = module.exports = {};
 const models = require('../models');
 
-exports.index = function(req, res) {
-    let page = req.query.page || 1;
-    let offset = 0;
-    if (page > 1) {
-        offset = ((page - 1) * 10)  + 1;
-    }
-    models.Mekanik.findAndCountAll({
-        limit : 10,
-        offset: offset,
-        order : [['id','DESC']],
-    }).then((mekanik) => {
+module.exports = {
+    indexWelcome: (req, res) => {
+        models.Mekanik.all().then(mekanik => {
+            res.render('main/index', {mekanik: mekanik.rows});
+        }).catch((err) => {
+            res.send(err)
+        })
+    },
+    indexMekanik: (req, res) => {
+        let page = req.query.page || 1;
+        let user = req.user;
+        let userHaveBengkel;
+        let offset = 0;
+        if (page > 1) {
+            offset = ((page - 1) * 10)  + 1;
+        }
+        models.Bengkel.findOne({ where : { UserId: req.user.id}}).then(function (bengkel) {
+            userHaveBengkel = bengkel.get();
+          }).catch(function(err){
+            console.log("Error:",err);
+          });
+
+        models.Mekanik.findAndCountAll({
+            limit : 10,
+            offset: offset,
+            order : [['id','DESC']],
+        }).then((mekanik) => {
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus};
+            const totalPage = Math.ceil(mekanik.count / 10);
+            const pagination = {totalPage : totalPage, currentPage: page};
+            res.render('mekanik/index',{
+            bengkelUser: userHaveBengkel,
+            user: user,
+            mekanik: mekanik.rows,
+            alert: alert,
+            pagination: pagination
+            });
+        });
+    },
+    create: (req, res) => {
+        res.render("mekanik/create")
+    },
+    createMekanik: (req, res) => {
+        const { BengkelId, fullName, numberPhone, keterangan,} = req.body;
         const alertMessage = req.flash('alertMessage');
         const alertStatus = req.flash('alertStatus');
         const alert = { message: alertMessage, status: alertStatus};
-        const totalPage = Math.ceil(mekanik.count / 10);
-        const pagination = {totalPage : totalPage, currentPage: page};
+        models.Mekanik.create({
+            BengkelId,
+            fullName,
+            numberPhone,
+            keterangan
+          }).then((Mekanik) => {
+            res.render("mekanik/index",{
 
-        // console.log(mekanik);
-        res.render('main/index',{
-        mekanik: mekanik.rows,
-        alert: alert,
-        pagination: pagination
-        });
-    });
-}
+            })
+            })
+    },
+    edit: (req, res) => {
 
-exports.indexMekanik = function(req, res) {
-    let page = req.query.page || 1;
-    let offset = 0;
-    if (page > 1) {
-        offset = ((page - 1) * 10)  + 1;
+    },
+    editMekanik: (req, res) => {
+
+    },
+    hapusMekanik: (req, res) => {
+
     }
-    models.Mekanik.findAndCountAll({
-        limit : 10,
-        offset: offset,
-        order : [['id','DESC']],
-    }).then((mekanik) => {
-        const alertMessage = req.flash('alertMessage');
-        const alertStatus = req.flash('alertStatus');
-        const alert = { message: alertMessage, status: alertStatus};
-        const totalPage = Math.ceil(mekanik.count / 10);
-        const pagination = {totalPage : totalPage, currentPage: page};
+};
 
-        // console.log(mekanik);
-        res.render('mekanik/index',{
-        mekanik: mekanik.rows,
-        alert: alert,
-        pagination: pagination
-        });
-    });
-}
+
+
 
 // exports.create = function(req, res) {
 //     const alertMessage = req.flash('alertMessage');
